@@ -1,12 +1,12 @@
 package gookie
 
-import (
-	"time"
-)
+import "github.com/cdvelop/model"
 
 type Gookie struct {
-	Name       string
-	Domain     string //localhost:8080 ,web.com
-	Https      bool
-	Expiration time.Duration //ej: 1*time.Minute
+	Name   string
+	Domain string //localhost:8080 ,web.com
+	Https  bool
+
+	model.CookieExpiration //ej: 1*time.Minute
+	age                    int
 }

@@ -2,7 +2,6 @@ package gookie
 
 import (
 	"net/http"
-	"time"
 )
 
 // domain ej: "example.com"
@@ -13,9 +12,9 @@ func (c Gookie) Set(value string, w http.ResponseWriter) {
 		Value:      value,
 		Path:       "/",      // / La cookie se aplica a todo el sitio
 		Domain:     c.Domain, //"example.com"  La cookie se aplica solo a ese dominio
-		Expires:    time.Now().Add(c.Expiration),
+		Expires:    c.GetExpirationTime(),
 		RawExpires: "",                      // No se utiliza un valor personalizado en bruto para la fecha de vencimiento
-		MaxAge:     0,                       // 0 La cookie se eliminará al cerrar el navegador
+		MaxAge:     c.CookieAge(),           // 0 La cookie se eliminará al cerrar el navegador
 		Secure:     c.Https,                 //true La cookie solo se enviará a través de una conexión segura (HTTPS)
 		HttpOnly:   true,                    //true La cookie no está disponible para scripts del lado del cliente (XSS)
 		SameSite:   http.SameSiteStrictMode, // 3 Restricción estricta en el envío de la cookie en solicitudes cruzadas (CSRF)

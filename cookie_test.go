@@ -5,9 +5,9 @@ import (
 	"net/http"
 	"net/http/httptest"
 	"testing"
-	"time"
 
 	"github.com/cdvelop/gookie"
+	"github.com/cdvelop/model"
 )
 
 const value_example = "cookie_value_example"
@@ -16,10 +16,12 @@ const cookie_name = "session"
 func login(w http.ResponseWriter, r *http.Request) {
 
 	cookie := gookie.Gookie{
-		Name:       cookie_name,
-		Domain:     "",
-		Https:      false,
-		Expiration: 2 * time.Minute,
+		Name:   cookie_name,
+		Domain: "",
+		Https:  false,
+		CookieExpiration: model.CookieExpiration{
+			Forever: true,
+		},
 	}
 
 	cookie.Set(value_example, w)
